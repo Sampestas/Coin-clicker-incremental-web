@@ -22,6 +22,12 @@ function updateUI(property, value){
 
 export const player = new Proxy(rawPlayerData, {
     set(target, property, value){
+
+        if (property === "upgrades"){
+            target.upgrades = value || {};
+            return true;
+        }
+
         target[property] = value;
         updateUI(property, value);
         return true;
