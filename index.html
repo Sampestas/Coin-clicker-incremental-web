@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Coin Clicker Incremental</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-select=none">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <style>
             body {
                 background-color: rgb(80, 49, 15);
@@ -11,8 +11,12 @@
                 overflow-x: hidden;
                 overflow-y: auto;
                 user-select: none;
-                -webkit-user-select: none;
                 touch-action: manipulation;
+
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
             }
 
             button, .game-btn, .upgrade-button, .modal-close-btn {
@@ -365,7 +369,7 @@
         </style>
     </head>
     <body>
-        
+
         <div id="gameName">Coin Clicker Incremental</div>
 
         <div class="game-container">
@@ -416,6 +420,6 @@
         </template>
 
 
-        <script type="module" src="main.js"></script>
+        <script type="module" src="scripts/main.js"></script>
     </body>
 </html>
