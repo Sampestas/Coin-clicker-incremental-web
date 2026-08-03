@@ -16,27 +16,13 @@ jobs:
     - name: Copy repository code
       uses: actions/checkout@v4
 
-    - name: Quick syntax check
-      run: node --check scripts/*.js
-
-  deploy-to-pages:
-    needs: check-code
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-    - name: Copy repository code
-      uses: actions/checkout@v4
-      
-    - name: Setup Pages
-      uses: actions/configure-pages@v5
-      
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v3
+    - name: Set up Node.js environment
+      uses: actions/setup-node@v4
       with:
-        path: '.'
-        
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
+        node-version: '20'
+
+    - name: Install ESLint
+      run: npm install eslint @eslint/js globals --save-dev
+
+    - name: Run ESLint Check
+      run: npx eslint scripts/
