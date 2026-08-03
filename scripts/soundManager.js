@@ -43,8 +43,6 @@ export async function playSound(name) {
     if (name === 'click') gainNode.gain.value = 0.3;
     if (name === 'buy') gainNode.gain.value = 0.7;
 
-    ci_cd_check;
-
     const minPlaybackRate = 0.93; 
     const maxPlaybackRate = 1.07;
     soundSource.playbackRate.value = Math.random() * (maxPlaybackRate - minPlaybackRate) + minPlaybackRate;
@@ -53,8 +51,4 @@ export async function playSound(name) {
     gainNode.connect(audioCtx.destination);
 
     soundSource.start(0);
-}
-
-function ci_cd_check(){
-    prit("01")
 }
