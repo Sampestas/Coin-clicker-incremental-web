@@ -41,6 +41,7 @@ function init() {
     })
 
     renderUpgrades();
+    window.playerDataForTest = player;
 }   
 
 document.addEventListener("DOMContentLoaded", init);
