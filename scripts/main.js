@@ -53,17 +53,7 @@ function onCoinClick(event) {
     playSound("click");
     addCoins(clickPower);
     renderUpgrades();
-
-    let eventForFloating = event;
-    if (event && event.type === "touchstart" && event.touches.length > 0){
-        eventForFloating = {
-            clientX: event.touches[0].clientX,
-            clientY: event.touches[0].clientY,
-            preventDefault: event.preventDefault.bind(event)
-        };
-    }
-
-    createClickFloatingText(eventForFloating, clickPower);
+    createClickFloatingText(event, clickPower);
 }
 
 function handleMultipleCoinClicks(event) {
@@ -71,9 +61,11 @@ function handleMultipleCoinClicks(event) {
     const touchCount = event.touches.length;
     for (let i = 0; i < touchCount; i++){
         const syntheticEvent = {
+            touches: [event.touches[i]],
             clientX: event.touches[i].clientX,
             clientY: event.touches[i].clientY,
-            type: "touchstart"
+            pageX: event.touches[i].pageX,
+            pageY: event.touches[i].pageY
         };
 
         onCoinClick(syntheticEvent);
