@@ -4,6 +4,7 @@ import { createClickFloatingText } from "./uiEffectsManager.js";
 import { getCoinsPerClick, getCoinsPerSecond } from "./statsManager.js";
 import { loadGame, saveGame } from "./saveManager.js";
 import { playSound } from "./soundManager.js";
+import { isMobileDevice } from "./deviceManager.js";
 
 function init() {
     const hasSave = loadGame();
@@ -15,13 +16,14 @@ function init() {
     }
 
     const clickButton = document.getElementById("clickButton");
-    clickButton.addEventListener("click", () => {
-        let clickPower = getCoinsPerClick();
-        playSound("click");
-        addCoins(clickPower);
-        renderUpgrades();
-        createClickFloatingText(event, clickPower);
-    });
+    const isMobile = isMobileDevice();
+
+    if (isMobile) {
+        clickButton.addEventListener("touchstart", handleMultipleCoinClicks, {passive: false});
+        clickButton.addEventListener("click", onCoinClick);
+    } else clickButton.addEventListener("click", onCoinClick);
+    
+    console.log(isMobile);
 
     setInterval(() => {
         let passiveIncome = getCoinsPerSecond();
@@ -45,3 +47,19 @@ function init() {
 }   
 
 document.addEventListener("DOMContentLoaded", init);
+
+function onCoinClick() {
+    let clickPower = getCoinsPerClick();
+    playSound("click");
+    addCoins(clickPower);
+    renderUpgrades();
+    createClickFloatingText(event, clickPower);
+}
+
+function handleMultipleCoinClicks(event) {
+    event.preventDefault();
+    const touchCount = event.touches.length;
+    for (let i = 0; i < touchCount; i++){
+        onCoinClick();
+    }
+}
