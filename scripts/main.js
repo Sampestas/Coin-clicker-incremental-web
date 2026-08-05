@@ -48,18 +48,34 @@ function init() {
 
 document.addEventListener("DOMContentLoaded", init);
 
-function onCoinClick() {
+function onCoinClick(event) {
     let clickPower = getCoinsPerClick();
     playSound("click");
     addCoins(clickPower);
     renderUpgrades();
-    createClickFloatingText(event, clickPower);
+
+    let eventForFloating = event;
+    if (event && event.type === "touchstart" && event.touches.length > 0){
+        eventForFloating = {
+            clientX: event.touches[0].clientX,
+            clientY: event.touches[0].clientY,
+            preventDefault: event.preventDefault.bind(event)
+        };
+    }
+
+    createClickFloatingText(eventForFloating, clickPower);
 }
 
 function handleMultipleCoinClicks(event) {
     event.preventDefault();
     const touchCount = event.touches.length;
     for (let i = 0; i < touchCount; i++){
-        onCoinClick();
+        const syntheticEvent = {
+            clientX: event.touches[i].clientX,
+            clientY: event.touches[i].clientY,
+            type: "touchstart"
+        };
+
+        onCoinClick(syntheticEvent);
     }
 }
