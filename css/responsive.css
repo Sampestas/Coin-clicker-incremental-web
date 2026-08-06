@@ -1,0 +1,45 @@
+/* ==========================================================================
+   Tablets and Small Laptops (Under 1024px)
+   ========================================================================== */
+@media (max-width: 64rem) { /* 1024px / 16 = 64rem */
+    html {
+        font-size: 14px; /* Globally shrinks all UI, typography, and spaces by ~12% */
+    }
+}
+
+/* ==========================================================================
+   Phones and Mobile Layout Adaptations (Under 480px)
+   ========================================================================== */
+@media (max-width: 30rem) { /* 480px / 16 = 30rem */
+    html {
+        font-size: 12px; /* Globally shrinks all elements by 25% from desktop baseline */
+    }
+
+    .coins-display,
+    .stat-display {
+        text-align: center;
+    }
+
+    .game-btn {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .upgrade-item {
+        gap: 0.5rem;
+    }
+
+    .upgrade-button {
+        flex-shrink: 0;
+    }
+}
+
+/* ==========================================================================
+   Smallest Devices (Under 360px)
+   ========================================================================== */
+@media (max-width: 22.5rem) { /* 360px / 16 = 22.5rem */
+    html {
+        font-size: 11px;
+    }
+}
