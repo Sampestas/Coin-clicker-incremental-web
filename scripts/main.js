@@ -18,10 +18,8 @@ function init() {
     const clickButton = document.getElementById("clickButton");
     const isMobile = isMobileDevice();
 
-    if (isMobile) {
-        clickButton.addEventListener("touchstart", handleMultipleCoinClicks, {passive: false});
-        clickButton.addEventListener("click", onCoinClick);
-    } else clickButton.addEventListener("click", onCoinClick);
+    if (isMobile) clickButton.addEventListener("touchstart", handleMultipleCoinClicks, {passive: false});
+    else clickButton.addEventListener("click", onCoinClick);
     
     console.log(isMobile);
 
