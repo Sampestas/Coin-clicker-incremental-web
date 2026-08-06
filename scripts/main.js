@@ -18,9 +18,12 @@ function init() {
     const clickButton = document.getElementById("clickButton");
     const isMobile = isMobileDevice();
 
-    if (isMobile) clickButton.addEventListener("touchstart", handleMultipleCoinClicks, {passive: false});
-    else clickButton.addEventListener("click", onCoinClick);
-    
+    if (isMobile){
+        clickButton.addEventListener("touchstart", handleMultipleCoinClicks, {passive: false});
+    } else {
+        clickButton.addEventListener("click", onCoinClick);
+    }
+
     console.log(isMobile);
 
     setInterval(() => {
@@ -56,14 +59,15 @@ function onCoinClick(event) {
 
 function handleMultipleCoinClicks(event) {
     event.preventDefault();
-    const touchCount = event.touches.length;
-    for (let i = 0; i < touchCount; i++){
+    const touches = event.changedTouches;
+    for (let i = 0; i < touches.length; i++){
+        const touch = touches[i];
         const syntheticEvent = {
-            touches: [event.touches[i]],
-            clientX: event.touches[i].clientX,
-            clientY: event.touches[i].clientY,
-            pageX: event.touches[i].pageX,
-            pageY: event.touches[i].pageY
+            touches: [touch],
+            clientX: touch.clientX,
+            clientY: touch.clientY,
+            pageX: touch.pageX,
+            pageY: touch.pageY
         };
 
         onCoinClick(syntheticEvent);
