@@ -20,12 +20,6 @@
         text-align: center;
     }
 
-    .game-btn {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-
     .upgrade-item {
         gap: 0.5rem;
     }
