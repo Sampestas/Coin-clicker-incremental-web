@@ -93,6 +93,12 @@
     color: rgb(255, 187, 0);
 }
 
+.upgrade-description {
+    font-size: 1rem;
+    font-weight:400;
+    color: rgb(253, 253, 253);
+}
+
 .js-count {
     font-size: 1.5rem;
     font-weight: bold;

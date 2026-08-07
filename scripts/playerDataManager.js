@@ -1,3 +1,5 @@
+import { formatNumber } from "./textFormattingManager.js";
+
 const rawPlayerData = {
     coins: 0,
     coinsPerSecond: 0,
@@ -5,18 +7,23 @@ const rawPlayerData = {
     upgrades: {},
 };
 
+/**
+ * 
+ * @param {string} property 
+ * @param {number} value 
+ */
 function updateUI(property, value){
     if (property === "coins"){
         const el = document.getElementById("coinDisplay");
-        if (el) el.textContent = `Coins: ${value}`;
+        if (el) el.textContent = `Coins: ${formatNumber(value)}`;
     }
     else if (property === "coinsPerSecond"){
         const el = document.getElementById("cpsDisplay");
-        if (el) el.textContent = `Coins per second: ${value}`;
+        if (el) el.textContent = `Coins per second: ${formatNumber(value)}`;
     }
     else if (property === "coinsPerClick"){
         const el = document.getElementById("cpcDisplay");
-        if (el) el.textContent = `Coins per click: ${value}`;
+        if (el) el.textContent = `Coins per click: ${formatNumber(value)}`;
     }
 }
 

@@ -1,3 +1,5 @@
+import { formatNumber } from "./textFormattingManager.js";
+
 export function createClickFloatingText(event, clickPower) {
     console.log('Floating text called', event, clickPower); // Debug
 
@@ -39,7 +41,7 @@ export function showOfflineModal(coins, seconds) {
     if (!modal || !timeSpan || !coinsSpan || !closeBtn) return;
 
     timeSpan.textContent = seconds;
-    coinsSpan.textContent = coins;
+    coinsSpan.textContent = formatNumber(coins);
 
     modal.classList.add("show");
 

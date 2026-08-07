@@ -4,6 +4,8 @@ const soundPaths = {
 };
 
 const audioBuffers = {};
+
+/** @type {AudioContext} */
 let audioCtx = null;
 
 function initAudio() {
@@ -40,8 +42,8 @@ export async function playSound(name) {
 
     const gainNode = audioCtx.createGain();
     
-    if (name === 'click') gainNode.gain.value = 0.3;
-    if (name === 'buy') gainNode.gain.value = 0.7;
+    if (name === 'click') gainNode.gain.value = 0.2;
+    if (name === 'buy') gainNode.gain.value = 0.6;
 
     const minPlaybackRate = 0.93; 
     const maxPlaybackRate = 1.07;
