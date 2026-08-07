@@ -57,12 +57,12 @@
 }
 
 .game-btn:hover .btn-content {
-    transform: scale(0.95);
+    transform: scale(1.05);
     box-shadow: 0 0.375rem 0.75rem rgba(0, 0, 0, 0.3);
 }
 
 .game-btn:active .btn-content {
-    transform: scale(0.9);
+    transform: scale(1);
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
 }
 
