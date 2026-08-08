@@ -20,6 +20,15 @@
     white-space: nowrap;
 }
 
+.diamonds-display {
+    color: rgb(0, 195, 255);
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.3);
+    margin: 0;
+    white-space: nowrap;
+}
+
 .stat-display {
     color: rgb(163, 120, 0);
     font-size: 1.56rem;
@@ -133,6 +142,52 @@
     cursor: not-allowed;
     box-shadow: none;
     transform: none;
+}
+
+.prestige-button {
+    width: 65%;
+    max-width: 22rem;
+    height: 8rem;
+    margin-top: 2rem;
+
+    background-color: rgb(201, 142, 15);
+    color: rgb(252 232 41);
+    border: 0.5rem solid rgb(165, 104, 13);
+    border-radius: 1rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s, transform 0.05s;
+}
+
+.prestige-button:hover {
+    transform: scale(1.05);
+}
+
+.prestige-button:active {
+    transform: scale(1);
+}
+
+.prestige-btn:disabled {
+    background-color: rgb(130, 110, 95);
+    color: rgb(190, 180, 175);
+
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.prestige-text {
+    font-size: 1rem;
+    font-weight: bold;
+    color: rgb(255, 245, 220);
+}
+
+.prestige-diamond-amount {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rgb(19, 171, 231);
 }
 
 .modal-overlay {

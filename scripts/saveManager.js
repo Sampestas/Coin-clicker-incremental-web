@@ -7,6 +7,7 @@ const SAVE_KEY = "coin_clicker_save_V1";
 export function saveGame() {
     const saveData = {
         coins: player.coins,
+        diamonds: player.diamonds,
         upgrades: player.upgrades,
         lastTime: Date.now()
     };
@@ -22,6 +23,7 @@ export function loadGame() {
     try {
         const saveData = JSON.parse(rawData);
         player.coins = saveData.coins || 0;
+        player.diamonds = saveData.diamonds || 0;
 
         if (saveData.upgrades) {
             player.upgrades = saveData.upgrades;

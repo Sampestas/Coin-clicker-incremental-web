@@ -12,6 +12,10 @@
     animation: floatUpAndFade 0.8s ease-out forwards;
 }
 
+.floating-text.blue-text {
+    color: rgb(45, 206, 255);
+}
+
 @keyframes floatUpAndFade {
     0% {
         transform: translate3d(0, 0, 0);

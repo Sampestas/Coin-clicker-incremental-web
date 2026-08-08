@@ -1,11 +1,13 @@
 import { formatNumber } from "./textFormattingManager.js";
 
-export function createClickFloatingText(event, clickPower) {
-    console.log('Floating text called', event, clickPower); // Debug
-
+export function createClickFloatingText(event, clickPower, currency) {
     const floatingDiv = document.createElement("div");
-    floatingDiv.textContent = "+" + clickPower;
+    floatingDiv.textContent = "+" + formatNumber(clickPower);
     floatingDiv.classList.add("floating-text");
+
+    if (currency === "diamonds"){
+        floatingDiv.classList.add("blue-text");
+    }
 
     let x,y;
 

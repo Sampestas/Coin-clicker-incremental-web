@@ -1,4 +1,4 @@
-import { player, subtractCoins } from './playerDataManager.js';
+import { player, subtractCurrency } from './playerDataManager.js';
 import { getCoinsPerClick, getCoinsPerSecond } from './statsManager.js';
 import { playSound } from './soundManager.js';
 import { formatNumber } from './textFormattingManager.js';
@@ -7,16 +7,30 @@ export const upgradesData = {
     minerGnome: {
         name: "Gnome-miner",
         description: "+1 coin per second for each gnome-miner",
+        buyCurrency: "coins",
         baseCost: 10,
         coinsPerSecond: 1,
-        coinsPerClick: 0,
     },
-    clickMultiplier: {
+    refinedPickaxe: {
         name: "Refined pickaxe",
         description: "+2 coins per click for each refined pickaxe level",
+        buyCurrency: "coins",
         baseCost: 50,
-        coinsPerSecond: 0,
         coinsPerClick: 2
+    },
+    managerGnome: {
+        name: "Gnome-manager",
+        description: "Increases your coins per second multiplier by +1",
+        buyCurrency: "coins",
+        baseCost: 120,
+        coinsIncomeMultiplier: 1
+    },
+    coinDuplication: {
+        name: "Coin Duplication",
+        description: "Increase your coins per click multiplier by +1",
+        buyCurrency: "coins",
+        baseCost: 125,
+        coinsClickMultiplier: 1
     }
 };
 
@@ -58,7 +72,7 @@ export function renderUpgrades() {
 
         if (upgradeRow) {
             upgradeRow.querySelector(".js-count").textContent = "Lvl: " + count;
-            upgradeRow.querySelector(".js-cost").textContent = formatNumber(currentCost);
+            upgradeRow.querySelector(".js-cost").textContent = formatNumber(currentCost) + " " + data.buyCurrency;
 
             const button = upgradeRow.querySelector(".js-button");
             const shouldBeDisabled = player.coins < currentCost;
@@ -76,7 +90,7 @@ function buyUpgrade(upgradeId) {
     const cost = getUpgradeCost(upgradeId);
 
     if (player.coins >= cost) {
-        subtractCoins(cost);
+        subtractCurrency(upgradesData[upgradeId].buyCurrency, cost);
         player.upgrades[upgradeId] = (player.upgrades[upgradeId] || 0) + 1;
         player.coinsPerSecond = getCoinsPerSecond();
         player.coinsPerClick = getCoinsPerClick();

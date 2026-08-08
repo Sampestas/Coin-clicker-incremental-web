@@ -1,10 +1,12 @@
-import { addCoins, player } from "./playerDataManager.js";
+import { addCurrency, addCoinsCoinClick, addCoinsPassiveIncome, player } from "./playerDataManager.js";
 import { renderUpgrades, upgradesData } from "./upgradeManager.js";
 import { createClickFloatingText } from "./uiEffectsManager.js";
 import { getCoinsPerClick, getCoinsPerSecond } from "./statsManager.js";
-import { loadGame, saveGame } from "./saveManager.js";
+import { loadGame, resetGame, saveGame } from "./saveManager.js";
 import { playSound } from "./soundManager.js";
 import { isMobileDevice } from "./deviceManager.js";
+import { resetUpgrade } from "./developmentManager.js";
+import { calcAmountOfDiamondsOnPrestige, defaultDiamondCost, prestige } from "./prestigeManager.js";
 
 function init() {
     const hasSave = loadGame();
@@ -21,18 +23,19 @@ function init() {
     if (isMobile){
         clickButton.addEventListener("touchstart", handleMultipleCoinClicks, {passive: false});
     } else {
-        clickButton.addEventListener("click", onCoinClick);
+        clickButton.addEventListener("click", addCoinsCoinClick);
     }
 
-    console.log(isMobile);
+    const prestigeButton = document.getElementById("prestige-btn");
+    prestigeButton.addEventListener("click", (event) => {
+        if (player.coins >= defaultDiamondCost){
+            createClickFloatingText(event, calcAmountOfDiamondsOnPrestige(), "diamonds");
+            prestige();
+        }
+    });
 
     setInterval(() => {
-        let passiveIncome = getCoinsPerSecond();
-
-        if (passiveIncome > 0){
-            addCoins(passiveIncome);
-            renderUpgrades();
-        }
+        addCoinsPassiveIncome();
     }, 1000);
 
     setInterval(() => {
@@ -49,14 +52,6 @@ function init() {
 
 document.addEventListener("DOMContentLoaded", init);
 
-function onCoinClick(event) {
-    let clickPower = getCoinsPerClick();
-    playSound("click");
-    addCoins(clickPower);
-    renderUpgrades();
-    createClickFloatingText(event, clickPower);
-}
-
 function handleMultipleCoinClicks(event) {
     event.preventDefault();
     const touches = event.changedTouches;
@@ -70,6 +65,6 @@ function handleMultipleCoinClicks(event) {
             pageY: touch.pageY
         };
 
-        onCoinClick(syntheticEvent);
+        addCoinsCoinClick(syntheticEvent);
     }
 }
