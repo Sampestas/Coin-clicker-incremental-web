@@ -20,7 +20,7 @@ const rawPlayerData = {
  */
 function updateUI(property, value){
     switch (property) {
-        case "coins":
+        case "coins": {
             const elCoin = document.getElementById("coinDisplay");
             if (elCoin) elCoin.textContent = `Coins: ${formatNumber(value)}`;
 
@@ -29,20 +29,25 @@ function updateUI(property, value){
                 diamondAmountPrestige.textContent = formatNumber(calcAmountOfDiamondsOnPrestige());
             }
             break;
-        case "diamonds":
+        }
+        case "diamonds": {
             const elDiamond = document.getElementById("diamondsDisplay");
             if (elDiamond) elDiamond.textContent = `Diamonds: ${formatNumber(value)}`;
             break;
-        case "coinsPerSecond":
+        }
+        case "coinsPerSecond": {
             const elCPS = document.getElementById("cpsDisplay");
             if (elCPS) elCPS.textContent = `Coins per second: ${formatNumber(value)}`;
             break;
-        case "coinsPerClick":
+        }
+        case "coinsPerClick": {
             const elCPC = document.getElementById("cpcDisplay");
             if (elCPC) elCPC.textContent = `Coins per click: ${formatNumber(value)}`;
             break;
+        }
     }
 }
+
 
 export const player = new Proxy(rawPlayerData, {
     set(target, property, value){
